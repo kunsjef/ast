@@ -722,6 +722,33 @@ dd {
   color: var(--text);
 }
 
+.rfc-page {
+  color-scheme: light;
+  color: #111;
+  background: #d8d8d8;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.rfc-shell {
+  width: min(100%, 86ch);
+  margin: 0 auto;
+  padding: 32px 12px;
+}
+
+.rfc-document {
+  min-height: calc(100vh - 64px);
+  margin: 0;
+  padding: 56px 64px;
+  overflow-x: auto;
+  border: 1px solid #b8b8b8;
+  background: #fff;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  color: #111;
+  font: 0.95rem/1.22 "Courier New", Courier, monospace;
+  tab-size: 8;
+  white-space: pre;
+}
+
 .footer {
   padding: 18px;
   color: var(--muted);
@@ -823,5 +850,17 @@ dd {
   .bar-row {
     grid-template-columns: 56px minmax(0, 1fr) 58px;
     gap: 8px;
+  }
+
+  .rfc-shell {
+    padding: 0;
+  }
+
+  .rfc-document {
+    min-height: 100vh;
+    padding: 24px 16px;
+    border: 0;
+    box-shadow: none;
+    font-size: 0.78rem;
   }
 }
