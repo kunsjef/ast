@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AST Tools</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="console">
+      <header class="masthead about-masthead">
+        <div class="status-rail" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="masthead-copy">
+          <p class="kicker">Department of Freedom-Aligned Chronometry</p>
+          <h1>AST Tools</h1>
+          <p class="brief">
+            Authorized conversion apparatus for translating modern clock facts
+            into American Standard Time filings, and back again when legacy
+            systems insist on participating.
+          </p>
+        </div>
+        <div class="command-chip">astctl convert --jurisdiction=local</div>
+      </header>
+
+      <section class="split-grid">
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Modern to AST</span>
+            <code>local_datetime</code>
+          </div>
+          <form class="tool-form" id="modernForm">
+            <label>
+              Modern local datetime
+              <input id="modernInput" type="datetime-local">
+            </label>
+            <div class="tool-actions">
+              <button type="button" id="modernNow">Use now</button>
+              <button type="submit">Convert</button>
+            </div>
+          </form>
+          <dl class="signal-list tool-output">
+            <div><dt>official</dt><dd id="modernOfficial">-</dd></div>
+            <div><dt>civilian</dt><dd id="modernCivilian">-</dd></div>
+            <div><dt>filing_line</dt><dd id="modernFiling">-</dd></div>
+          </dl>
+          <div class="copy-bank">
+            <button type="button" id="copyModernResult">Copy result</button>
+            <span id="modernStatus" aria-live="polite"></span>
+          </div>
+        </article>
+
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>AST to Modern</span>
+            <code>shift.block.round.slice</code>
+          </div>
+          <form class="tool-form" id="astForm">
+            <label>
+              AST official timestamp
+              <input id="astInput" type="text" placeholder="2.3.4.08">
+            </label>
+            <div class="tool-actions">
+              <button type="submit">Convert</button>
+            </div>
+          </form>
+          <dl class="signal-list tool-output">
+            <div><dt>modern_time</dt><dd id="astModern">-</dd></div>
+            <div><dt>civilian</dt><dd id="astCivilian">-</dd></div>
+            <div><dt>validation</dt><dd id="astValidation">awaiting filing</dd></div>
+          </dl>
+          <div class="copy-bank">
+            <button type="button" id="copyAstResult">Copy result</button>
+            <span id="astStatus" aria-live="polite"></span>
+          </div>
+        </article>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Conversion Notes</span>
+          <code>implementation.guidance</code>
+        </div>
+        <div class="prose-grid">
+          <p>Modern inputs use the browser's local timezone. The office accepts this because jurisdiction begins wherever the clock is observed.</p>
+          <p>Official AST input accepts Shift.Block.Round.Slice, with Shift 1-2, Block 1-5, Round 0-5, and Slice 0-11.</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Live Clock</a>
+          <a href="tools.html">Tools</a>
+          <a href="about.html">About AST</a>
+          <a href="standard.html">AST Standard</a>
+        </nav>
+        <span>AST</span> conversion desk open for business.
+      </footer>
+    </main>
+
+    <script src="tools.js"></script>
+  </body>
+</html>

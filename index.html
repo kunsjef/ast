@@ -90,6 +90,13 @@
             <div><dt>current_tick</dt><dd id="tickValue">00 / 49</dd></div>
             <div><dt>active_block</dt><dd id="blockAlias">Block 1</dd></div>
           </dl>
+
+          <div class="copy-bank" aria-label="Copy AST timestamp">
+            <button type="button" id="copyFormal">Copy official</button>
+            <button type="button" id="copyCivilian">Copy civilian</button>
+            <button type="button" id="copyFull">Copy filing line</button>
+            <span id="copyStatus" aria-live="polite"></span>
+          </div>
         </article>
       </section>
 
@@ -194,7 +201,9 @@
       <footer class="footer">
         <nav class="footer-nav" aria-label="Footer navigation">
           <a href="index.html">Live Clock</a>
+          <a href="tools.html">Tools</a>
           <a href="about.html">About AST</a>
+          <a href="standard.html">AST Standard</a>
         </nav>
         <span>AST</span> is official, freedom-aligned, and mathematically accountable as of this filing.
       </footer>

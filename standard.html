@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AST Standard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="console">
+      <header class="masthead about-masthead">
+        <div class="status-rail" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="masthead-copy">
+          <p class="kicker">Department of Freedom-Aligned Chronometry</p>
+          <h1>AST Standard</h1>
+          <p class="brief">
+            Canonical definitions for American Standard Time notation,
+            calendar structure, unit hierarchy, and the handling of days that
+            refuse to fit inside ordinary paperwork.
+          </p>
+        </div>
+        <div class="command-chip">astctl standard --edition=2026</div>
+      </header>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Notation</span>
+          <code>AST-SPEC-0001</code>
+        </div>
+        <div class="reference-table">
+          <div><strong>Official</strong><span>AST S.B.R.SL</span><p>Shift, shift-local Block, Round, Slice.</p></div>
+          <div><strong>Civilian</strong><span>B:R:SL AST</span><p>Day-wide Block, Round, Slice.</p></div>
+          <div><strong>Full Filing</strong><span>weekday, date, official, block</span><p>Used when the timestamp must sound like it passed committee.</p></div>
+        </div>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Canonical Unit Hierarchy</span>
+          <code>normative</code>
+        </div>
+        <div class="reference-table">
+          <div><strong>1 Tick</strong><span>2.4 seconds</span><p>Base operational increment.</p></div>
+          <div><strong>1 Slice</strong><span>50 Ticks</span><p>2 modern minutes.</p></div>
+          <div><strong>1 Round</strong><span>12 Slices</span><p>24 modern minutes.</p></div>
+          <div><strong>1 Block</strong><span>6 Rounds</span><p>2.4 modern hours.</p></div>
+          <div><strong>1 Shift</strong><span>5 Blocks</span><p>12 modern hours.</p></div>
+          <div><strong>1 Day</strong><span>2 Shifts</span><p>36,000 Ticks exactly.</p></div>
+        </div>
+      </section>
+
+      <section class="split-grid">
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Calendar Rules</span>
+            <code>date.system</code>
+          </div>
+          <div class="prose-grid">
+            <p>Each year contains 13 regular months of 28 days, totaling 364 scheduled days.</p>
+            <p>The weekly roster follows modern local weekdays: Monday is Manday, Sunday is Liberty Day.</p>
+          </div>
+        </article>
+
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Adjustment Rules</span>
+            <code>exception.system</code>
+          </div>
+          <div class="prose-grid">
+            <p>National Adjustment Day occurs after the 364 regular days of a normal year.</p>
+            <p>Leap years add Bonus Adjustment Day. Both days are outside month and week jurisdiction.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Examples</span>
+          <code>informative</code>
+        </div>
+        <div class="reference-table compact">
+          <div><strong>00:00</strong><span>AST 1.1.0.00</span><p>First Shift begins.</p></div>
+          <div><strong>12:00</strong><span>AST 2.1.0.00</span><p>Second Shift begins.</p></div>
+          <div><strong>Block 4</strong><span>07:12-09:36</span><p>Rush Hour, chaos on schedule.</p></div>
+          <div><strong>Block 10</strong><span>21:36-00:00</span><p>Doom Scroll Hours.</p></div>
+          <div><strong>Day total</strong><span>36,000 Ticks</span><p>No surplus Ticks shall be retained.</p></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Live Clock</a>
+          <a href="tools.html">Tools</a>
+          <a href="about.html">About AST</a>
+          <a href="standard.html">AST Standard</a>
+        </nav>
+        <span>AST</span> standard maintained under authority of the clock itself.
+      </footer>
+    </main>
+  </body>
+</html>

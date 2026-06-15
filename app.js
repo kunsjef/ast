@@ -89,7 +89,17 @@ const dom = {
   roundDialLabels: $("roundDialLabels"),
   monthGrid: $("monthGrid"),
   monthGridLabel: $("monthGridLabel"),
+  copyFormal: $("copyFormal"),
+  copyCivilian: $("copyCivilian"),
+  copyFull: $("copyFull"),
+  copyStatus: $("copyStatus"),
   clock: document.querySelector(".ast-clock"),
+};
+
+const currentCopy = {
+  formal: "",
+  civilian: "",
+  full: "",
 };
 
 function pad(value, width = 2) {
@@ -271,6 +281,7 @@ function update() {
   const ast = toAst(now);
   const calendar = astCalendar(now);
   const formal = `AST ${ast.shift}.${ast.block}.${ast.round}.${pad(ast.slice)}`;
+  const civilian = `${ast.globalBlock}:${ast.round}:${pad(ast.slice)} AST`;
   const alias = BLOCK_ALIASES[ast.globalBlockIndex] || ["Unscheduled Block", "documentation pending"];
 
   dom.oShift.textContent = ast.shift;
@@ -311,11 +322,27 @@ function update() {
   dom.adjustment.textContent = calendar.adjustment;
   renderMonthGrid(calendar);
 
+  currentCopy.formal = formal;
+  currentCopy.civilian = civilian;
+  currentCopy.full = `${calendar.workday}, ${calendar.label}; ${formal}; ${civilian}; Block ${ast.globalBlock}: ${alias[0]}`;
+
   setClockAngles(ast);
   updateActiveBlock(ast.globalBlockIndex);
 }
 
+async function copyText(value, label) {
+  try {
+    await navigator.clipboard.writeText(value);
+    dom.copyStatus.textContent = `${label} copied`;
+  } catch (error) {
+    dom.copyStatus.textContent = "copy unavailable";
+  }
+}
+
 renderDialLabels();
 renderBlockSchedule();
+dom.copyFormal.addEventListener("click", () => copyText(currentCopy.formal, "official"));
+dom.copyCivilian.addEventListener("click", () => copyText(currentCopy.civilian, "civilian"));
+dom.copyFull.addEventListener("click", () => copyText(currentCopy.full, "filing line"));
 update();
 setInterval(update, 250);
