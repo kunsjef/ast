@@ -707,6 +707,21 @@ dd {
   color: var(--text);
 }
 
+.rfc-pre {
+  margin: 0;
+  padding: 14px;
+  overflow-x: auto;
+  border: 1px solid rgba(79, 121, 128, 0.32);
+  background: rgba(7, 9, 11, 0.55);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+}
+
+.rfc-pre code {
+  color: var(--text);
+}
+
 .footer {
   padding: 18px;
   color: var(--muted);

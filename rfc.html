@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RFC-AST-0001</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="console">
+      <header class="masthead about-masthead">
+        <div class="status-rail" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="masthead-copy">
+          <p class="kicker">Request for Chronometric Comments</p>
+          <h1>RFC-AST-0001</h1>
+          <p class="brief">
+            American Standard Time: a freedom-aligned civil time notation for
+            shifts, blocks, rounds, slices, ticks, adjustment days, and other
+            matters requiring official confidence.
+          </p>
+        </div>
+        <div class="command-chip">rfcctl view --number=AST-0001</div>
+      </header>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Status of This Memo</span>
+          <code>informational</code>
+        </div>
+        <div class="prose-grid">
+          <p>
+            This memo specifies American Standard Time for public implementation,
+            private amusement, operational dashboards, and any committee that
+            needs a timestamp with more posture.
+          </p>
+          <p>
+            Distribution of this memo is unlimited. Compliance is encouraged
+            wherever coffee, maintenance windows, or vaguely official scheduling
+            language is observed.
+          </p>
+        </div>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Abstract</span>
+          <code>AST</code>
+        </div>
+        <div class="prose-grid">
+          <p>
+            AST divides one modern day into 2 Shifts, 10 Blocks, 60 Rounds,
+            720 Slices, and 36,000 Ticks. This creates a system that is tidy
+            enough for computers and strange enough for procurement.
+          </p>
+          <p>
+            The notation defined here provides both an official representation,
+            <code>AST Shift.Block.Round.Slice</code>, and a civilian
+            representation, <code>Block:Round:Slice AST</code>.
+          </p>
+        </div>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Normative Unit Definitions</span>
+          <code>MUST</code>
+        </div>
+        <div class="reference-table">
+          <div><strong>Tick</strong><span>MUST equal 2.4 seconds</span><p>The base unit.</p></div>
+          <div><strong>Slice</strong><span>MUST equal 50 Ticks</span><p>Two modern minutes.</p></div>
+          <div><strong>Round</strong><span>MUST equal 12 Slices</span><p>Twenty-four modern minutes.</p></div>
+          <div><strong>Block</strong><span>MUST equal 6 Rounds</span><p>Two point four modern hours.</p></div>
+          <div><strong>Shift</strong><span>MUST equal 5 Blocks</span><p>Twelve modern hours.</p></div>
+          <div><strong>Day</strong><span>MUST equal 2 Shifts</span><p>Thirty-six thousand Ticks.</p></div>
+        </div>
+      </section>
+
+      <section class="split-grid">
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Syntax</span>
+            <code>ABNF-ish</code>
+          </div>
+          <pre class="rfc-pre"><code>official = "AST" SP shift "." block "." round "." slice
+shift    = "1" / "2"
+block    = "1" / "2" / "3" / "4" / "5"
+round    = "0" / "1" / "2" / "3" / "4" / "5"
+slice    = 1*2DIGIT ; valid range 00-11
+
+civilian = dayblock ":" round ":" slice SP "AST"
+dayblock = "1" / "2" / "3" / "4" / "5" /
+           "6" / "7" / "8" / "9" / "10"</code></pre>
+        </article>
+
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Calendar Rules</span>
+            <code>normative</code>
+          </div>
+          <div class="prose-grid">
+            <p>Implementations MUST provide 13 months of 28 days each.</p>
+            <p>National Adjustment Day and Bonus Adjustment Day MUST NOT be assigned to any month or week.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Examples</span>
+          <code>non-normative</code>
+        </div>
+        <div class="reference-table compact">
+          <div><strong>00:00</strong><span>AST 1.1.0.00</span><p>System enters First Shift.</p></div>
+          <div><strong>07:12</strong><span>AST 1.4.0.00</span><p>Rush Hour begins.</p></div>
+          <div><strong>12:00</strong><span>AST 2.1.0.00</span><p>Second Shift begins.</p></div>
+          <div><strong>21:36</strong><span>AST 2.5.0.00</span><p>Doom Scroll Hours begin.</p></div>
+          <div><strong>23:59</strong><span>AST 2.5.5.11</span><p>End-of-day paperwork approaches.</p></div>
+        </div>
+      </section>
+
+      <section class="split-grid">
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Security Considerations</span>
+            <code>mandatory</code>
+          </div>
+          <div class="prose-grid">
+            <p>
+              Implementers SHOULD NOT deploy AST during a production incident
+              unless all participants have accepted that the meeting will become
+              17 percent more official.
+            </p>
+            <p>
+              Timestamps copied from AST systems MAY confuse unprepared auditors.
+              This is expected behavior.
+            </p>
+          </div>
+        </article>
+
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>IANA Considerations</span>
+            <code>registry.requested</code>
+          </div>
+          <div class="prose-grid">
+            <p>
+              This document requests a registry for AST Block names, Month
+              names, and approved excuses for Adjustment Day unavailability.
+            </p>
+            <p>
+              Initial registry population is provided by the Department of
+              Freedom-Aligned Chronometry.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Live Clock</a>
+          <a href="tools.html">Tools</a>
+          <a href="about.html">About AST</a>
+          <a href="standard.html">AST Standard</a>
+          <a href="rfc.html">RFC</a>
+        </nav>
+        <span>RFC-AST-0001</span> filed for immediate chronological consideration.
+      </footer>
+    </main>
+  </body>
+</html>

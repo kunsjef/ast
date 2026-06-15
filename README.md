@@ -49,6 +49,7 @@ Block:Round:Slice AST
 - `tools.html` - modern-to-AST and AST-to-modern conversion tools.
 - `about.html` - why AST exists, unit overview, week/month rules, and named Blocks.
 - `standard.html` - official notation, canonical definitions, calendar rules, and examples.
+- `rfc.html` - official Request for Chronometric Comments.
 
 ## Calendar
 
@@ -91,6 +92,7 @@ index.html      Live clock
 tools.html      Conversion tools
 about.html      AST explanation
 standard.html   AST standard
+rfc.html        Official RFC
 styles.css      Shared styling
 app.js          Live clock logic
 tools.js        Converter logic
