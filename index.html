@@ -16,7 +16,7 @@
           <p class="kicker">Department of Freedom-Aligned Chronometry</p>
           <h1>American Standard Time</h1>
           <p class="brief">
-            AST is the federally plausible clock system that divides every day into
+            AST is the federally adopted clock system that divides every day into
             2 Shifts, 10 Blocks, 60 Rounds, 720 Slices, and 36,000 Ticks.
             It is optimized for coffee breaks, incident reports, football pacing,
             and saying "approximately" with institutional confidence.
@@ -36,6 +36,8 @@
             <div class="ast-clock" aria-hidden="true">
               <div class="clock-scale outer-scale"></div>
               <div class="clock-scale inner-scale"></div>
+              <div class="dial-labels block-labels" id="blockDialLabels"></div>
+              <div class="dial-labels round-labels" id="roundDialLabels"></div>
               <div class="clock-orbit day-orbit"></div>
               <div class="clock-orbit block-orbit"></div>
               <div class="clock-orbit round-orbit"></div>
@@ -141,16 +143,10 @@
 
         <article class="data-panel">
           <div class="panel-title">
-            <span>Alarm Severity</span>
-            <code>ops.lexicon</code>
+            <span>Current Month</span>
+            <code id="monthGridLabel">28_day_grid</code>
           </div>
-          <ol class="severity-list">
-            <li><span>Info</span><strong>Noted</strong></li>
-            <li><span>Warning</span><strong>Raised Eyebrow</strong></li>
-            <li><span>Major</span><strong>Truck Roll Pending</strong></li>
-            <li><span>Critical</span><strong>Bald Eagle Event</strong></li>
-            <li><span>Disaster</span><strong>Federal Time Incident</strong></li>
-          </ol>
+          <div class="month-grid" id="monthGrid"></div>
         </article>
       </section>
 
@@ -177,7 +173,7 @@
       </section>
 
       <footer class="footer">
-        <span>AST</span> is fictional, browser-side, and mathematically accountable as of this filing.
+        <span>AST</span> is official, freedom-aligned, and mathematically accountable as of this filing.
       </footer>
     </main>
 

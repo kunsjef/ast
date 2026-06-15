@@ -85,6 +85,10 @@ const dom = {
   yearDay: $("yearDay"),
   adjustment: $("adjustment"),
   blockGrid: $("blockGrid"),
+  blockDialLabels: $("blockDialLabels"),
+  roundDialLabels: $("roundDialLabels"),
+  monthGrid: $("monthGrid"),
+  monthGridLabel: $("monthGridLabel"),
   clock: document.querySelector(".ast-clock"),
 };
 
@@ -127,6 +131,18 @@ function renderBlockSchedule() {
       <p>${index < BLOCKS_PER_SHIFT ? "First Shift" : "Second Shift"}</p>
     </article>
   `).join("");
+}
+
+function renderDialLabels() {
+  dom.blockDialLabels.innerHTML = Array.from({ length: BLOCKS_PER_DAY }, (_, index) => {
+    const angle = index * (360 / BLOCKS_PER_DAY);
+    return `<span class="dial-label" style="--label-angle:${angle}deg; --label-radius:-44%;">${index + 1}</span>`;
+  }).join("");
+
+  dom.roundDialLabels.innerHTML = Array.from({ length: ROUNDS_PER_BLOCK }, (_, index) => {
+    const angle = index * (360 / ROUNDS_PER_BLOCK);
+    return `<span class="dial-label" style="--label-angle:${angle}deg; --label-radius:-27%;">R${index}</span>`;
+  }).join("");
 }
 
 function toAst(date) {
@@ -173,6 +189,7 @@ function astCalendar(date) {
       label: "National Adjustment Day",
       dayOfYear,
       adjustment: "National Adjustment Day",
+      isAdjustment: true,
     };
   }
 
@@ -182,6 +199,7 @@ function astCalendar(date) {
       label: "Bonus Adjustment Day",
       dayOfYear,
       adjustment: "Bonus Adjustment Day",
+      isAdjustment: true,
     };
   }
 
@@ -193,7 +211,29 @@ function astCalendar(date) {
     label: `${MONTHS[monthIndex]}, Day ${pad(monthDay)} (M${pad(monthIndex + 1)})`,
     dayOfYear,
     adjustment: "none",
+    isAdjustment: false,
+    monthIndex,
+    monthDay,
   };
+}
+
+function renderMonthGrid(calendar) {
+  if (calendar.isAdjustment) {
+    dom.monthGridLabel.textContent = "outside_month";
+    dom.monthGrid.innerHTML = `<div class="month-cell adjustment">${calendar.label}<br>outside week and month jurisdiction</div>`;
+    return;
+  }
+
+  dom.monthGridLabel.textContent = `${MONTHS[calendar.monthIndex]} / 28_day_grid`;
+  const headers = DAYS.slice(1).concat(DAYS[0]);
+  const headerCells = headers.map((day) => `<div class="month-cell header">${day.slice(0, 3)}</div>`).join("");
+  const dayCells = Array.from({ length: 28 }, (_, index) => {
+    const day = index + 1;
+    const todayClass = day === calendar.monthDay ? " today" : "";
+    return `<div class="month-cell${todayClass}">${pad(day)}</div>`;
+  }).join("");
+
+  dom.monthGrid.innerHTML = headerCells + dayCells;
 }
 
 function percent(value, max) {
@@ -261,11 +301,13 @@ function update() {
   dom.calendarDate.textContent = calendar.label;
   dom.yearDay.textContent = calendar.dayOfYear.toLocaleString();
   dom.adjustment.textContent = calendar.adjustment;
+  renderMonthGrid(calendar);
 
   setClockAngles(ast);
   updateActiveBlock(ast.globalBlockIndex);
 }
 
+renderDialLabels();
 renderBlockSchedule();
 update();
 setInterval(update, 250);

@@ -190,7 +190,9 @@ code {
 
 .clock-scale,
 .clock-orbit,
-.clock-hand {
+.clock-hand,
+.dial-labels,
+.dial-label {
   position: absolute;
   pointer-events: none;
 }
@@ -216,6 +218,40 @@ code {
 .block-orbit { inset: 20%; }
 .round-orbit { inset: 30%; }
 .slice-orbit { inset: 40%; }
+
+.dial-labels {
+  inset: 0;
+  border-radius: 50%;
+}
+
+.dial-label {
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 1.25rem;
+  margin-left: -1.1rem;
+  margin-top: -0.625rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1;
+  transform:
+    rotate(var(--label-angle))
+    translateY(var(--label-radius))
+    rotate(calc(-1 * var(--label-angle)));
+}
+
+.block-labels .dial-label {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.round-labels .dial-label {
+  color: var(--green);
+  font-size: 0.68rem;
+  opacity: 0.82;
+}
 
 .clock-hand {
   left: 50%;
@@ -410,35 +446,43 @@ dd {
 .block-fill { background: var(--amber); }
 .day-fill { background: var(--red); }
 
-.severity-list {
+.month-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
 }
 
-.severity-list li {
-  min-width: 0;
-  padding: 10px;
-  border: 1px solid rgba(79, 121, 128, 0.35);
-  background: rgba(7, 9, 11, 0.45);
+.month-cell {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(79, 121, 128, 0.28);
+  background: rgba(7, 9, 11, 0.38);
+  color: var(--text);
+  font-size: 0.88rem;
 }
 
-.severity-list span,
-.severity-list strong {
-  display: block;
-}
-
-.severity-list span {
+.month-cell.header {
+  min-height: auto;
+  padding: 0 0 6px;
+  border: 0;
+  background: transparent;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.68rem;
 }
 
-.severity-list strong {
+.month-cell.today {
+  border-color: var(--amber);
   color: var(--amber);
-  overflow-wrap: anywhere;
+  background: rgba(244, 184, 74, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(244, 184, 74, 0.18);
+}
+
+.month-cell.adjustment {
+  grid-column: 1 / -1;
+  min-height: 76px;
+  color: var(--amber);
+  text-align: center;
 }
 
 .block-grid {
@@ -583,7 +627,6 @@ dd {
     text-align: left;
   }
 
-  .severity-list,
   .block-grid {
     grid-template-columns: 1fr;
   }
