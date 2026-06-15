@@ -225,8 +225,8 @@ code {
 }
 
 .dial-label {
-  left: 50%;
-  top: 50%;
+  left: var(--label-x);
+  top: var(--label-y);
   display: grid;
   place-items: center;
   width: 2.2rem;
@@ -236,10 +236,7 @@ code {
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1;
-  transform:
-    rotate(var(--label-angle))
-    translateY(var(--label-radius))
-    rotate(calc(-1 * var(--label-angle)));
+  transform: translate(-50%, -50%);
 }
 
 .block-labels .dial-label {

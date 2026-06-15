@@ -135,14 +135,22 @@ function renderBlockSchedule() {
 
 function renderDialLabels() {
   dom.blockDialLabels.innerHTML = Array.from({ length: BLOCKS_PER_DAY }, (_, index) => {
-    const angle = index * (360 / BLOCKS_PER_DAY);
-    return `<span class="dial-label" style="--label-angle:${angle}deg; --label-radius:-44%;">${index + 1}</span>`;
+    const position = polarLabelPosition(index, BLOCKS_PER_DAY, 43);
+    return `<span class="dial-label" style="--label-x:${position.x}%; --label-y:${position.y}%;">${index + 1}</span>`;
   }).join("");
 
   dom.roundDialLabels.innerHTML = Array.from({ length: ROUNDS_PER_BLOCK }, (_, index) => {
-    const angle = index * (360 / ROUNDS_PER_BLOCK);
-    return `<span class="dial-label" style="--label-angle:${angle}deg; --label-radius:-27%;">R${index}</span>`;
+    const position = polarLabelPosition(index, ROUNDS_PER_BLOCK, 28);
+    return `<span class="dial-label" style="--label-x:${position.x}%; --label-y:${position.y}%;">R${index}</span>`;
   }).join("");
+}
+
+function polarLabelPosition(index, total, radiusPercent) {
+  const angle = ((index / total) * 2 * Math.PI) - (Math.PI / 2);
+  return {
+    x: (50 + Math.cos(angle) * radiusPercent).toFixed(3),
+    y: (50 + Math.sin(angle) * radiusPercent).toFixed(3),
+  };
 }
 
 function toAst(date) {
