@@ -15,13 +15,13 @@ const SECONDS_PER_BLOCK = ROUNDS_PER_BLOCK * SECONDS_PER_ROUND;
 const SECONDS_PER_SHIFT = BLOCKS_PER_SHIFT * SECONDS_PER_BLOCK;
 
 const DAYS = [
+  "Liberty Day",
   "Manday",
   "Twosday",
   "Wrenchday",
   "Thirstday",
   "Fryday",
   "Yardday",
-  "Liberty Day",
 ];
 
 const MONTHS = [
@@ -84,6 +84,7 @@ const dom = {
   calendarDate: $("calendarDate"),
   yearDay: $("yearDay"),
   adjustment: $("adjustment"),
+  blockGrid: $("blockGrid"),
   clock: document.querySelector(".ast-clock"),
 };
 
@@ -100,8 +101,32 @@ function localSecondsSinceMidnight(date) {
   );
 }
 
+function formatTimeWindow(blockIndex) {
+  const startSeconds = blockIndex * SECONDS_PER_BLOCK;
+  const endSeconds = startSeconds + SECONDS_PER_BLOCK;
+  return `${formatClockTime(startSeconds)}-${formatClockTime(endSeconds)}`;
+}
+
+function formatClockTime(seconds) {
+  const wrapped = seconds % SECONDS_PER_DAY;
+  const hours = Math.floor(wrapped / 3600);
+  const minutes = Math.floor((wrapped % 3600) / 60);
+  return `${pad(hours)}:${pad(minutes)}`;
+}
+
 function isLeapYear(year) {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+}
+
+function renderBlockSchedule() {
+  dom.blockGrid.innerHTML = BLOCK_ALIASES.map(([name, description], index) => `
+    <article class="block-card" data-block-index="${index}">
+      <code>Block ${index + 1} / ${formatTimeWindow(index)}</code>
+      <strong>${name}</strong>
+      <span>${description}</span>
+      <p>${index < BLOCKS_PER_SHIFT ? "First Shift" : "Second Shift"}</p>
+    </article>
+  `).join("");
 }
 
 function toAst(date) {
@@ -144,7 +169,7 @@ function astCalendar(date) {
 
   if (dayIndex === 364) {
     return {
-      workday: "none",
+      workday: DAYS[date.getDay()],
       label: "National Adjustment Day",
       dayOfYear,
       adjustment: "National Adjustment Day",
@@ -153,7 +178,7 @@ function astCalendar(date) {
 
   if (dayIndex === 365 && leap) {
     return {
-      workday: "none",
+      workday: DAYS[date.getDay()],
       label: "Bonus Adjustment Day",
       dayOfYear,
       adjustment: "Bonus Adjustment Day",
@@ -164,7 +189,7 @@ function astCalendar(date) {
   const monthDay = (dayIndex % 28) + 1;
 
   return {
-    workday: DAYS[dayIndex % DAYS.length],
+    workday: DAYS[date.getDay()],
     label: `${MONTHS[monthIndex]}, Day ${pad(monthDay)} (M${pad(monthIndex + 1)})`,
     dayOfYear,
     adjustment: "none",
@@ -187,6 +212,12 @@ function setClockAngles(ast) {
   dom.clock.style.setProperty("--tick-angle", `${((ast.seconds % SECONDS_PER_TICK) / SECONDS_PER_TICK) * 360}deg`);
 }
 
+function updateActiveBlock(globalBlockIndex) {
+  document.querySelectorAll(".block-card").forEach((card) => {
+    card.classList.toggle("active", Number(card.dataset.blockIndex) === globalBlockIndex);
+  });
+}
+
 function update() {
   const now = new Date();
   const ast = toAst(now);
@@ -204,7 +235,7 @@ function update() {
   dom.shiftLabel.textContent = ast.shift === 1 ? "First Shift" : "Second Shift";
 
   dom.coreTime.textContent = formal;
-  dom.coreTick.textContent = `Tick ${pad(ast.tick)} / 49`;
+  dom.coreTick.textContent = `T${pad(ast.tick)}`;
   dom.modernTime.textContent = now.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -232,7 +263,9 @@ function update() {
   dom.adjustment.textContent = calendar.adjustment;
 
   setClockAngles(ast);
+  updateActiveBlock(ast.globalBlockIndex);
 }
 
+renderBlockSchedule();
 update();
 setInterval(update, 250);

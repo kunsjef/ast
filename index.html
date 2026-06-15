@@ -7,210 +7,177 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <main class="terminal">
-      <header class="terminal-header">
-        <div>
-          <h1>American Standard Time</h1>
-          <p>because 24 hours was too European, but decimal time was too French</p>
+    <main class="console">
+      <header class="masthead">
+        <div class="status-rail" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
         </div>
-        <code>astctl --live --clock=combined</code>
+        <div class="masthead-copy">
+          <p class="kicker">Department of Freedom-Aligned Chronometry</p>
+          <h1>American Standard Time</h1>
+          <p class="brief">
+            AST is the federally plausible clock system that divides every day into
+            2 Shifts, 10 Blocks, 60 Rounds, 720 Slices, and 36,000 Ticks.
+            It is optimized for coffee breaks, incident reports, football pacing,
+            and saying "approximately" with institutional confidence.
+          </p>
+        </div>
+        <div class="command-chip">astctl observe --mode=freedom</div>
       </header>
 
-      <section class="section timestamp" aria-label="Current AST timestamp">
-        <div class="section-label">Timestamp</div>
+      <section class="command-grid" aria-label="Live AST console">
+        <article class="clock-panel">
+          <div class="panel-title">
+            <span>Combined Instrument</span>
+            <code id="coreTime">AST 1.1.0.00</code>
+          </div>
 
-        <div class="display-row official">
-          <div class="display-tag">OFFICIAL</div>
-          <div class="display-units" aria-live="polite">
-            <div class="display-unit">
-              <span class="display-unit-num" id="oShift">-</span>
-              <span class="display-unit-lbl">Shift</span>
+          <div class="instrument-wrap">
+            <div class="ast-clock" aria-hidden="true">
+              <div class="clock-scale outer-scale"></div>
+              <div class="clock-scale inner-scale"></div>
+              <div class="clock-orbit day-orbit"></div>
+              <div class="clock-orbit block-orbit"></div>
+              <div class="clock-orbit round-orbit"></div>
+              <div class="clock-orbit slice-orbit"></div>
+              <div class="clock-hand day-hand"></div>
+              <div class="clock-hand block-hand"></div>
+              <div class="clock-hand round-hand"></div>
+              <div class="clock-hand slice-hand"></div>
+              <div class="clock-hand tick-hand"></div>
+              <div class="clock-core">
+                <span>AST</span>
+                <strong id="coreTick">T00</strong>
+              </div>
             </div>
-            <span class="display-sep">.</span>
-            <div class="display-unit">
-              <span class="display-unit-num" id="oBlock">-</span>
-              <span class="display-unit-lbl">Block</span>
-            </div>
-            <span class="display-sep">.</span>
-            <div class="display-unit">
-              <span class="display-unit-num" id="oRound">-</span>
-              <span class="display-unit-lbl">Round</span>
-            </div>
-            <span class="display-sep">.</span>
-            <div class="display-unit">
-              <span class="display-unit-num" id="oSlice">--</span>
-              <span class="display-unit-lbl">Slice</span>
+            <div class="legend">
+              <span><i class="day-dot"></i>Day</span>
+              <span><i class="block-dot"></i>Block</span>
+              <span><i class="round-dot"></i>Round</span>
+              <span><i class="slice-dot"></i>Slice</span>
+              <span><i class="tick-dot"></i>Tick</span>
             </div>
           </div>
-          <div class="display-sub" id="shiftLabel">First Shift</div>
-        </div>
+        </article>
 
-        <div class="display-row civilian">
-          <div class="display-tag">CIVILIAN</div>
-          <div class="display-units">
-            <div class="display-unit ghost" aria-hidden="true">
-              <span class="display-unit-num">-</span>
-              <span class="display-unit-lbl">Shift</span>
-            </div>
-            <span class="display-sep ghost" aria-hidden="true">.</span>
-            <div class="display-unit">
-              <span class="display-unit-num" id="cBlock">-</span>
-              <span class="display-unit-lbl">Block</span>
-            </div>
-            <span class="display-sep">:</span>
-            <div class="display-unit">
-              <span class="display-unit-num" id="cRound">-</span>
-              <span class="display-unit-lbl">Round</span>
-            </div>
-            <span class="display-sep">:</span>
-            <div class="display-unit">
-              <span class="display-unit-num" id="cSlice">--</span>
-              <span class="display-unit-lbl">Slice</span>
-            </div>
+        <article class="readout-panel">
+          <div class="panel-title">
+            <span>Live Readout</span>
+            <code>local oscillator</code>
           </div>
-          <div class="display-sub">AST</div>
-        </div>
+
+          <div class="timestamp official" aria-live="polite">
+            <span class="tag">official</span>
+            <strong>
+              <span id="oShift">1</span><b>.</b><span id="oBlock">1</span><b>.</b><span id="oRound">0</span><b>.</b><span id="oSlice">00</span>
+            </strong>
+            <em id="shiftLabel">First Shift</em>
+          </div>
+
+          <div class="timestamp civilian">
+            <span class="tag">civilian</span>
+            <strong>
+              <span id="cBlock">1</span><b>:</b><span id="cRound">0</span><b>:</b><span id="cSlice">00</span>
+            </strong>
+            <em>AST</em>
+          </div>
+
+          <dl class="signal-list">
+            <div><dt>modern_time</dt><dd id="modernTime">--:--:--</dd></div>
+            <div><dt>tick_of_day</dt><dd id="tickOfDay">0 / 36,000</dd></div>
+            <div><dt>current_tick</dt><dd id="tickValue">00 / 49</dd></div>
+            <div><dt>active_block</dt><dd id="blockAlias">Block 1</dd></div>
+          </dl>
+        </article>
       </section>
 
-      <section class="section clock-section" aria-label="Combined AST clock">
-        <div class="section-label">Combined Clock</div>
-
-        <div class="clock-layout">
-          <div class="ast-clock" aria-hidden="true">
-            <div class="track day-track"></div>
-            <div class="track block-track"></div>
-            <div class="track round-track"></div>
-            <div class="track slice-track"></div>
-            <div class="track tick-track"></div>
-            <div class="clock-hand day-hand"></div>
-            <div class="clock-hand block-hand"></div>
-            <div class="clock-hand round-hand"></div>
-            <div class="clock-hand slice-hand"></div>
-            <div class="clock-hand tick-hand"></div>
-            <div class="clock-core">
-              <span id="coreTime">AST 1.1.0.00</span>
-              <small id="coreTick">T00</small>
-            </div>
-          </div>
-
-          <div class="clock-readout">
-            <div class="line">
-              <span class="key">modern_time</span>
-              <strong id="modernTime">--:--:--</strong>
-            </div>
-            <div class="line">
-              <span class="key">tick_of_day</span>
-              <strong id="tickOfDay">0 / 36,000</strong>
-            </div>
-            <div class="line">
-              <span class="key">current_tick</span>
-              <strong id="tickValue">00 / 49</strong>
-            </div>
-            <div class="line">
-              <span class="key">block_alias</span>
-              <strong id="blockAlias">Block 1</strong>
-            </div>
-          </div>
+      <section class="strip-panel" aria-label="Unit progress">
+        <div class="panel-title">
+          <span>Unit Progress</span>
+          <code>36k_tick_clock</code>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="section-label">Unit Progress</div>
         <div class="bars">
           <div class="bar-row">
-            <span class="bar-label">Tick</span>
-            <span class="bar-track"><span class="bar-fill tick-fill" id="barTick"></span></span>
-            <span class="bar-count" id="cntTick">00/49</span>
+            <span>Tick</span>
+            <div class="bar-track"><i class="bar-fill tick-fill" id="barTick"></i></div>
+            <code id="cntTick">00/49</code>
           </div>
           <div class="bar-row">
-            <span class="bar-label">Slice</span>
-            <span class="bar-track"><span class="bar-fill slice-fill" id="barSlice"></span></span>
-            <span class="bar-count" id="cntSlice">00/11</span>
+            <span>Slice</span>
+            <div class="bar-track"><i class="bar-fill slice-fill" id="barSlice"></i></div>
+            <code id="cntSlice">00/11</code>
           </div>
           <div class="bar-row">
-            <span class="bar-label">Round</span>
-            <span class="bar-track"><span class="bar-fill round-fill" id="barRound"></span></span>
-            <span class="bar-count" id="cntRound">0/5</span>
+            <span>Round</span>
+            <div class="bar-track"><i class="bar-fill round-fill" id="barRound"></i></div>
+            <code id="cntRound">0/5</code>
           </div>
           <div class="bar-row">
-            <span class="bar-label">Block</span>
-            <span class="bar-track"><span class="bar-fill block-fill" id="barBlock"></span></span>
-            <span class="bar-count" id="cntBlock">1/5</span>
+            <span>Block</span>
+            <div class="bar-track"><i class="bar-fill block-fill" id="barBlock"></i></div>
+            <code id="cntBlock">1/5</code>
           </div>
           <div class="bar-row">
-            <span class="bar-label">Day</span>
-            <span class="bar-track"><span class="bar-fill day-fill" id="barDay"></span></span>
-            <span class="bar-count" id="cntDay">0.0%</span>
+            <span>Day</span>
+            <div class="bar-track"><i class="bar-fill day-fill" id="barDay"></i></div>
+            <code id="cntDay">0.0%</code>
           </div>
         </div>
       </section>
 
-      <section class="section calendar-section" aria-label="AST calendar">
-        <div class="section-label">Calendar</div>
-        <div class="calendar-grid">
-          <div>
-            <span class="cal-key">AST WEEKDAY</span>
-            <strong class="cal-val accent" id="workday">Manday</strong>
+      <section class="split-grid">
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Calendar</span>
+            <code>modern_weekday_aligned</code>
           </div>
-          <div>
-            <span class="cal-key">AST DATE</span>
-            <strong class="cal-val" id="calendarDate">Januqueue, Day 01</strong>
+          <dl class="calendar-list">
+            <div><dt>ast_weekday</dt><dd id="workday">Manday</dd></div>
+            <div><dt>ast_date</dt><dd id="calendarDate">Januqueue, Day 01</dd></div>
+            <div><dt>year_day</dt><dd id="yearDay">1</dd></div>
+            <div><dt>adjustment</dt><dd id="adjustment">none</dd></div>
+          </dl>
+        </article>
+
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Alarm Severity</span>
+            <code>ops.lexicon</code>
           </div>
-          <div>
-            <span class="cal-key">YEAR DAY</span>
-            <strong class="cal-val" id="yearDay">1</strong>
-          </div>
-          <div>
-            <span class="cal-key">ADJUSTMENT</span>
-            <strong class="cal-val muted" id="adjustment">none</strong>
-          </div>
-        </div>
+          <ol class="severity-list">
+            <li><span>Info</span><strong>Noted</strong></li>
+            <li><span>Warning</span><strong>Raised Eyebrow</strong></li>
+            <li><span>Major</span><strong>Truck Roll Pending</strong></li>
+            <li><span>Critical</span><strong>Bald Eagle Event</strong></li>
+            <li><span>Disaster</span><strong>Federal Time Incident</strong></li>
+          </ol>
+        </article>
       </section>
 
-      <section class="section about-section" aria-label="How AST works">
-        <div class="section-label">How It Works</div>
-        <div class="about-grid">
-          <div class="about-row">
-            <span class="about-unit tick-text">Tick</span>
-            <span class="about-value">base unit<br><small>2.4 sec, 36,000/day</small></span>
-            <span class="about-desc">For short delays, microwave impatience, and waiting before saying “so anyway...”</span>
-          </div>
-          <div class="about-row">
-            <span class="about-unit slice-text">Slice</span>
-            <span class="about-value">50 Ticks<br><small>2 min, 720/day</small></span>
-            <span class="about-desc">Slightly longer than a normal minute in spirit, but now mathematically accountable.</span>
-          </div>
-          <div class="about-row">
-            <span class="about-unit round-text">Round</span>
-            <span class="about-value">12 Slices<br><small>24 min, 60/day</small></span>
-            <span class="about-desc">The standard unit for meetings, sports breaks, and optimistic maintenance windows.</span>
-          </div>
-          <div class="about-row">
-            <span class="about-unit block-text">Block</span>
-            <span class="about-value">6 Rounds<br><small>2.4 hr, 10/day</small></span>
-            <span class="about-desc">The main planning unit. Ten per day, five per Shift, suspiciously tidy.</span>
-          </div>
-          <div class="about-row">
-            <span class="about-unit shift-text">Shift</span>
-            <span class="about-value">5 Blocks<br><small>12 hr, 2/day</small></span>
-            <span class="about-desc">First Shift is midnight to noon. Second Shift is noon to midnight.</span>
-          </div>
+      <section class="block-panel" aria-label="Named AST blocks">
+        <div class="panel-title">
+          <span>Block Schedule</span>
+          <code>10 blocks / 2.4h each</code>
         </div>
+        <div class="block-grid" id="blockGrid"></div>
       </section>
 
-      <section class="section severity-section" aria-label="Alarm severity levels">
-        <div class="section-label">Alarm Severity</div>
-        <ol class="severity-list">
-          <li><span>Info</span><strong>Noted</strong></li>
-          <li><span>Warning</span><strong>Raised Eyebrow</strong></li>
-          <li><span>Major</span><strong>Truck Roll Pending</strong></li>
-          <li><span>Critical</span><strong>Bald Eagle Event</strong></li>
-          <li><span>Disaster</span><strong>Federal Time Incident</strong></li>
-        </ol>
+      <section class="data-panel about-panel" aria-label="AST unit explanation">
+        <div class="panel-title">
+          <span>Filed Under: How This Adds Up</span>
+          <code>canon.v2</code>
+        </div>
+        <div class="unit-grid">
+          <div><strong>Tick</strong><span>2.4 sec</span><p>Smallest normal unit. Useful for very brief delays and suspicious pauses.</p></div>
+          <div><strong>Slice</strong><span>50 Ticks / 2 min</span><p>The minute-shaped compromise nobody asked for but everyone must acknowledge.</p></div>
+          <div><strong>Round</strong><span>12 Slices / 24 min</span><p>Enough time for a "quick" meeting to become evidence.</p></div>
+          <div><strong>Block</strong><span>6 Rounds / 2.4 hr</span><p>The planning unit of record. Ten per day, because freedom enjoys tidy columns.</p></div>
+          <div><strong>Shift</strong><span>5 Blocks / 12 hr</span><p>First Shift is midnight-noon. Second Shift is noon-midnight. Almost reasonable.</p></div>
+        </div>
       </section>
 
       <footer class="footer">
-        <span>AST</span> updates every quarter-second. Canon: 1 day = 2 Shifts = 10 Blocks = 60 Rounds = 720 Slices = 36,000 Ticks.
+        <span>AST</span> is fictional, browser-side, and mathematically accountable as of this filing.
       </footer>
     </main>
 
