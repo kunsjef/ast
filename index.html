@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AST Clock</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot amber"></span>
+          <span class="dot green"></span>
+          <span class="session">astctl --live --jurisdiction=freedom</span>
+        </div>
+
+        <div class="hero-grid">
+          <div class="command-stack">
+            <p class="eyebrow">American Standard Time</p>
+            <h1 id="page-title">AST Clock</h1>
+            <p class="motto">Because 24 hours was too European, but decimal time was too French.</p>
+
+            <div class="readout primary-readout" aria-live="polite">
+              <span class="label">Formal timestamp</span>
+              <strong id="formalTime">AST 1.1.0.00</strong>
+            </div>
+
+            <div class="readout-grid">
+              <div class="readout">
+                <span class="label">Civilian</span>
+                <strong id="civilianTime">0:0:00 AST</strong>
+              </div>
+              <div class="readout">
+                <span class="label">Modern local</span>
+                <strong id="modernTime">--:--:--</strong>
+              </div>
+              <div class="readout">
+                <span class="label">Shift</span>
+                <strong id="shiftName">First Shift</strong>
+              </div>
+              <div class="readout">
+                <span class="label">Calendar</span>
+                <strong id="calendarDate">Manday M01 D01</strong>
+              </div>
+            </div>
+          </div>
+
+          <section class="dial-console" aria-label="Live AST dials">
+            <article class="dial large" style="--segments: 10; --progress: 0deg;">
+              <div class="dial-face">
+                <div class="ring"></div>
+                <div class="needle"></div>
+                <div class="hub"></div>
+                <span class="dial-value" id="blockValue">B0</span>
+              </div>
+              <h2>Day Blocks</h2>
+              <p>10 Blocks per operating day</p>
+            </article>
+
+            <div class="small-dials">
+              <article class="dial" style="--segments: 2; --progress: 0deg;">
+                <div class="dial-face">
+                  <div class="ring"></div>
+                  <div class="needle"></div>
+                  <div class="hub"></div>
+                  <span class="dial-value" id="shiftValue">S1</span>
+                </div>
+                <h2>Shift</h2>
+              </article>
+
+              <article class="dial" style="--segments: 6; --progress: 0deg;">
+                <div class="dial-face">
+                  <div class="ring"></div>
+                  <div class="needle"></div>
+                  <div class="hub"></div>
+                  <span class="dial-value" id="roundValue">R0</span>
+                </div>
+                <h2>Round</h2>
+              </article>
+
+              <article class="dial" style="--segments: 12; --progress: 0deg;">
+                <div class="dial-face">
+                  <div class="ring"></div>
+                  <div class="needle"></div>
+                  <div class="hub"></div>
+                  <span class="dial-value" id="sliceValue">SL00</span>
+                </div>
+                <h2>Slice</h2>
+              </article>
+
+              <article class="dial" style="--segments: 50; --progress: 0deg;">
+                <div class="dial-face">
+                  <div class="ring"></div>
+                  <div class="needle"></div>
+                  <div class="hub"></div>
+                  <span class="dial-value" id="tickValue">T00</span>
+                </div>
+                <h2>Tick</h2>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="grid-panels" aria-label="AST technical output">
+        <article class="panel">
+          <header>
+            <span>telemetry</span>
+            <code>ast.now()</code>
+          </header>
+          <dl class="metric-list">
+            <div><dt>tick_of_day</dt><dd id="tickOfDay">0</dd></div>
+            <div><dt>slice_of_day</dt><dd id="sliceOfDay">0</dd></div>
+            <div><dt>round_of_day</dt><dd id="roundOfDay">0</dd></div>
+            <div><dt>block_of_day</dt><dd id="blockOfDay">0</dd></div>
+            <div><dt>shift_progress</dt><dd id="shiftProgress">0.000%</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel">
+          <header>
+            <span>unit table</span>
+            <code>canonical</code>
+          </header>
+          <table>
+            <thead>
+              <tr><th>Unit</th><th>AST</th><th>Modern</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Tick</td><td>1 Tick</td><td>1.44 sec</td></tr>
+              <tr><td>Slice</td><td>50 Ticks</td><td>72 sec</td></tr>
+              <tr><td>Round</td><td>12 Slices</td><td>14.4 min</td></tr>
+              <tr><td>Block</td><td>6 Rounds</td><td>86.4 min</td></tr>
+              <tr><td>Shift</td><td>5 Blocks</td><td>12 hr</td></tr>
+              <tr><td>Day</td><td>2 Shifts</td><td>24 hr</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="panel">
+          <header>
+            <span>calendar</span>
+            <code>jan_1_epoch</code>
+          </header>
+          <dl class="metric-list">
+            <div><dt>workday</dt><dd id="workday">Manday</dd></div>
+            <div><dt>month</dt><dd id="month">1 / 13</dd></div>
+            <div><dt>day</dt><dd id="monthDay">1 / 28</dd></div>
+            <div><dt>year_day</dt><dd id="yearDay">1</dd></div>
+            <div><dt>adjustment</dt><dd id="adjustment">none</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel">
+          <header>
+            <span>severity map</span>
+            <code>ops.lexicon</code>
+          </header>
+          <ol class="severity-list">
+            <li><span>Info</span><strong>Noted</strong></li>
+            <li><span>Warning</span><strong>Raised Eyebrow</strong></li>
+            <li><span>Major</span><strong>Truck Roll Pending</strong></li>
+            <li><span>Critical</span><strong>Bald Eagle Event</strong></li>
+            <li><span>Disaster</span><strong>Federal Time Incident</strong></li>
+          </ol>
+        </article>
+      </section>
+
+      <section class="archive" aria-labelledby="archive-title">
+        <div>
+          <p class="eyebrow">official device archive</p>
+          <h2 id="archive-title">Field Hardware</h2>
+        </div>
+        <div class="asset-grid">
+          <figure>
+            <img src="assets/master-clock.png" alt="Official AST master wall clock">
+            <figcaption>Official Master Clock</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/dual-watch.png" alt="Luxury dual-dial AST wristwatch">
+            <figcaption>Rolex Dual Watch</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/kids-watch.png" alt="Educational kids AST watch">
+            <figcaption>Kids EST Watch</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="panel footnote">
+        <header>
+          <span>compliance note</span>
+          <code>spec.conflicts=resolved</code>
+        </header>
+        <p>
+          This implementation treats the unit hierarchy as canonical:
+          36,000 Ticks, 720 Slices, 60 Rounds, 10 Blocks, and 2 Shifts per day.
+          Any inconsistent field examples are preserved as folklore.
+        </p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
