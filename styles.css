@@ -60,8 +60,8 @@ body {
   grid-template-columns: 10px minmax(0, 1fr) auto;
   gap: 20px;
   align-items: stretch;
-  min-height: 230px;
-  padding: clamp(18px, 3.5vw, 42px);
+  min-height: 184px;
+  padding: clamp(16px, 2.7vw, 32px);
   overflow: hidden;
 }
 
@@ -101,11 +101,11 @@ body {
 }
 
 h1 {
-  max-width: 12ch;
-  margin: 8px 0 16px;
+  max-width: 16ch;
+  margin: 6px 0 12px;
   color: var(--text);
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 0.9;
+  font-size: clamp(2.5rem, 6.4vw, 5.6rem);
+  line-height: 0.92;
   letter-spacing: 0;
 }
 
@@ -114,6 +114,10 @@ h1 {
   margin: 0;
   color: var(--muted);
   font-size: clamp(0.98rem, 1.5vw, 1.16rem);
+}
+
+.about-masthead h1 {
+  max-width: 18ch;
 }
 
 .command-chip {
@@ -398,7 +402,8 @@ dd {
 
 .strip-panel,
 .block-panel,
-.about-panel {
+.about-panel,
+.adjustment-panel {
   margin-top: 18px;
 }
 
@@ -557,6 +562,86 @@ dd {
   font-size: 0.84rem;
 }
 
+.adjustment-grid,
+.prose-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.adjustment-grid div,
+.reference-table div,
+.reference-list div,
+.month-name-grid span {
+  min-width: 0;
+  border: 1px solid rgba(79, 121, 128, 0.32);
+  background: rgba(7, 9, 11, 0.38);
+}
+
+.adjustment-grid div,
+.reference-table div {
+  padding: 13px;
+}
+
+.adjustment-grid strong,
+.adjustment-grid span,
+.reference-table strong,
+.reference-table span,
+.reference-list strong,
+.reference-list span {
+  display: block;
+}
+
+.adjustment-grid strong,
+.reference-table strong,
+.reference-list strong {
+  color: var(--green);
+}
+
+.adjustment-grid span,
+.reference-table span,
+.reference-list span {
+  color: var(--cyan);
+  font-size: 0.84rem;
+}
+
+.adjustment-grid p,
+.reference-table p,
+.prose-grid p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.reference-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.reference-table.compact {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.reference-list {
+  display: grid;
+  gap: 8px;
+}
+
+.reference-list div {
+  padding: 10px 12px;
+}
+
+.month-name-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.month-name-grid span {
+  padding: 10px 12px;
+  color: var(--text);
+}
+
 .footer {
   padding: 18px;
   color: var(--muted);
@@ -567,10 +652,32 @@ dd {
   color: var(--amber);
 }
 
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 10px;
+}
+
+.footer-nav a {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(101, 216, 255, 0.45);
+}
+
+.footer-nav a:hover {
+  color: var(--amber);
+  border-bottom-color: var(--amber);
+}
+
 @media (max-width: 1040px) {
   .command-grid,
   .split-grid,
-  .unit-grid {
+  .unit-grid,
+  .reference-table,
+  .reference-table.compact,
+  .month-name-grid {
     grid-template-columns: 1fr;
   }
 
@@ -614,6 +721,11 @@ dd {
   .calendar-list div {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+
+  .adjustment-grid,
+  .prose-grid {
+    grid-template-columns: 1fr;
   }
 
   .timestamp strong {
