@@ -25,18 +25,18 @@ const DAYS = [
 ];
 
 const MONTHS = [
-  "Januvereignty",
-  "Federuary",
-  "Marchmandate",
-  "Aprilitary",
+  "Januwhy",
+  "Februbrrr",
+  "Marching",
+  "Aprilfoolery",
   "Mayday",
-  "Junependence",
-  "Juliberty",
-  "Augauthority",
-  "Septconstitution",
-  "Octobureau",
-  "Novemballot",
-  "Decorum",
+  "Junebug",
+  "Julazy",
+  "Aughust",
+  "Septumble",
+  "Octoboo",
+  "Novemblur",
+  "Decembrrr",
   "Adjustember",
 ];
 
