@@ -223,6 +223,9 @@ function astCalendar(date) {
 
   const monthIndex = Math.floor(dayIndex / 28);
   const monthDay = (dayIndex % 28) + 1;
+  const monthStartDayIndex = monthIndex * 28;
+  const monthStartDate = new Date(Date.UTC(year, 0, monthStartDayIndex + 1));
+  const monthStartWeekday = monthStartDate.getUTCDay();
 
   return {
     workday: DAYS[date.getDay()],
@@ -232,6 +235,7 @@ function astCalendar(date) {
     isAdjustment: false,
     monthIndex,
     monthDay,
+    monthStartWeekday,
   };
 }
 
@@ -245,13 +249,17 @@ function renderMonthGrid(calendar) {
   dom.monthGridLabel.textContent = `${MONTHS[calendar.monthIndex]} / 28_day_grid`;
   const headers = DAYS.slice(1).concat(DAYS[0]);
   const headerCells = headers.map((day) => `<div class="month-cell header">${day.slice(0, 3)}</div>`).join("");
+  const leadingBlankCount = (calendar.monthStartWeekday + 6) % 7;
+  const leadingCells = Array.from({ length: leadingBlankCount }, () => (
+    `<div class="month-cell empty" aria-hidden="true"></div>`
+  )).join("");
   const dayCells = Array.from({ length: 28 }, (_, index) => {
     const day = index + 1;
     const todayClass = day === calendar.monthDay ? " today" : "";
     return `<div class="month-cell${todayClass}">${pad(day)}</div>`;
   }).join("");
 
-  dom.monthGrid.innerHTML = headerCells + dayCells;
+  dom.monthGrid.innerHTML = headerCells + leadingCells + dayCells;
 }
 
 function percent(value, max) {

@@ -16,11 +16,11 @@
           <p class="kicker">Department of Freedom-Aligned Chronometry</p>
           <h1>About AST</h1>
           <p class="brief">
-            American Standard Time exists to bring order to the day with units fit
-            for operations rooms, coffee logistics, maintenance windows, and
-            official-looking excuses. It is imperial time for a republic that
-            measures liberty in Ticks: clean, divisible, and patriotic in the
-            way only a clock with 36,000 daily Ticks can be.
+            American Standard Time exists because time should be divisible by
+            coffee breaks, football quarters, and plausible work excuses. It is
+            imperial time for a republic that measures liberty in Ticks: clean,
+            divisible, and patriotic in the way only a clock with 36,000 daily
+            Ticks can be.
           </p>
         </div>
         <div class="command-chip">astctl doctrine --section=about</div>
@@ -42,10 +42,11 @@
           <p>
             The system is designed so daily math is suspiciously tidy:
             2 Shifts, 10 Blocks, 60 Rounds, 720 Slices, and 36,000 Ticks.
-            That means every Block is exactly 2.4 modern hours, a fact suitable
-            for dashboards, briefings, and confident whiteboard arrows. See also
-            DFAC Bulletin 36,000-T and RFC-AST-0001 for the approved posture on
-            timekeeping with national character.
+            That means every Block is exactly 2.4 modern hours and every Tick is
+            exactly 2.4 modern seconds, a fact suitable for dashboards,
+            briefings, and confident whiteboard arrows. See also DFAC Bulletin
+            36,000-T and RFC-AST-0001 for the approved posture on timekeeping
+            with national character.
           </p>
         </div>
       </section>
@@ -56,12 +57,61 @@
           <code>canon.units</code>
         </div>
         <div class="reference-table">
-          <div><strong>Tick</strong><span>2.4 seconds</span><p>Smallest standard unit.</p></div>
-          <div><strong>Slice</strong><span>50 Ticks / 2 minutes</span><p>Short coordination window.</p></div>
-          <div><strong>Round</strong><span>12 Slices / 24 minutes</span><p>Meeting and maintenance unit.</p></div>
-          <div><strong>Block</strong><span>6 Rounds / 2.4 hours</span><p>Main planning unit.</p></div>
-          <div><strong>Shift</strong><span>5 Blocks / 12 hours</span><p>First Shift or Second Shift.</p></div>
-          <div><strong>Day</strong><span>2 Shifts / 36,000 Ticks</span><p>Full daily operating cycle.</p></div>
+          <div><strong>Tick</strong><span>2.4 seconds</span><p>The smallest normal unit. Good for microwave impatience and the pause before saying "so anyway..."</p></div>
+          <div><strong>Slice</strong><span>50 Ticks / 2 minutes</span><p>A short coordination window, slightly larger than a minute because AST refuses to be hurried.</p></div>
+          <div><strong>Round</strong><span>12 Slices / 24 minutes</span><p>The standard measure for a "quick" meeting, a reboot, or finding out DNS is involved.</p></div>
+          <div><strong>Block</strong><span>6 Rounds / 2.4 hours</span><p>The main planning unit. There are 10 per day, which makes calendars look inspected.</p></div>
+          <div><strong>Shift</strong><span>5 Blocks / 12 hours</span><p>First Shift is midnight to noon. Second Shift is noon to midnight. Almost sensible.</p></div>
+          <div><strong>Day</strong><span>2 Shifts / 36,000 Ticks</span><p>The complete operating cycle: clean, suspiciously divisible, and suitable for federal stationery.</p></div>
+        </div>
+      </section>
+
+      <section class="split-grid">
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Telling Time</span>
+            <code>notation.system</code>
+          </div>
+          <div class="prose-grid">
+            <p>
+              Official AST is written as <code>AST Shift.Block.Round.Slice</code>.
+              For example, <code>AST 1.3.4.08</code> means First Shift, Block 3,
+              Round 4, Slice 08.
+            </p>
+            <p>
+              Civilian AST is written as <code>Block:Round:Slice AST</code> using
+              all 10 Blocks in the day. It looks like a sports score, which is
+              how any proper American standard should announce itself.
+            </p>
+          </div>
+        </article>
+
+        <article class="data-panel">
+          <div class="panel-title">
+            <span>Useful Phrases</span>
+            <code>field.examples</code>
+          </div>
+          <div class="reference-list">
+            <div><strong>20 Ticks</strong><span>Enough time to pretend the tab was already open.</span></div>
+            <div><strong>5 Slices</strong><span>A coffee retrieval estimate with legal flexibility.</span></div>
+            <div><strong>1 Round</strong><span>A server reboot, unless DNS arrives wearing a badge.</span></div>
+            <div><strong>Block 8</strong><span>Late enough for maintenance, early enough for blame.</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Example Conversions</span>
+          <code>2.4s_tick_math</code>
+        </div>
+        <div class="reference-table">
+          <div><strong>06:00</strong><span>AST 1.3.3.00</span><p>Civilian: 3:3:00 AST.</p></div>
+          <div><strong>09:00</strong><span>AST 1.4.4.06</span><p>Civilian: 4:4:06 AST.</p></div>
+          <div><strong>12:00</strong><span>AST 2.1.0.00</span><p>Civilian: 6:0:00 AST.</p></div>
+          <div><strong>15:00</strong><span>AST 2.2.1.06</span><p>Civilian: 7:1:06 AST.</p></div>
+          <div><strong>18:00</strong><span>AST 2.3.3.00</span><p>Civilian: 8:3:00 AST.</p></div>
+          <div><strong>21:00</strong><span>AST 2.4.4.06</span><p>Civilian: 9:4:06 AST.</p></div>
         </div>
       </section>
 
@@ -72,13 +122,13 @@
             <code>7_day_roster</code>
           </div>
           <div class="reference-list">
-            <div><strong>Manday</strong><span>Planning and regret.</span></div>
-            <div><strong>Twosday</strong><span>Meetings achieve formation.</span></div>
-            <div><strong>Wrenchday</strong><span>Fix what broke on Manday.</span></div>
-            <div><strong>Thirstday</strong><span>Morale requires monitoring.</span></div>
-            <div><strong>Fryday</strong><span>Deployments become folklore.</span></div>
-            <div><strong>Yardday</strong><span>Errands, sports, hardware stores.</span></div>
-            <div><strong>Liberty Day</strong><span>Officially sacred.</span></div>
+            <div><strong>Manday</strong><span>Planning, optimism, and the first official regret.</span></div>
+            <div><strong>Twosday</strong><span>Meetings achieve formation and begin circling the objective.</span></div>
+            <div><strong>Wrenchday</strong><span>Fix what broke on Manday, or rename it maintenance.</span></div>
+            <div><strong>Thirstday</strong><span>Morale declines, hydration becomes policy.</span></div>
+            <div><strong>Fryday</strong><span>Everything deploys badly, then becomes folklore.</span></div>
+            <div><strong>Yardday</strong><span>Errands, sports, hardware stores, and patriotic mulch.</span></div>
+            <div><strong>Liberty Day</strong><span>Officially sacred and administratively unavailable.</span></div>
           </div>
         </article>
 
@@ -90,16 +140,18 @@
           <div class="prose-grid">
             <p>
               The AST year contains 13 months of 28 days, producing 364 regular
-              calendar days with no ragged month endings and no excuses from
-              procurement. Each month name is entered into the patriotic absurdity
-              ledger with sufficient pun density for public-sector deployment.
+              calendar days with no ragged month endings, no fifth-week residue,
+              and no excuses from procurement. Each month name is entered into
+              the patriotic absurdity ledger with sufficient pun density for
+              public-sector deployment.
             </p>
             <p>
               National Adjustment Day handles the remaining day. Leap years add
               Bonus Adjustment Day. Neither belongs to a week or month, which is
               administratively bold, spiritually correct, and cited by DFAC
               Circular 13x28 as the only lawful way to keep imperial time from
-              getting too European.
+              getting too European. Banks close. Calendars panic. Software
+              engineers consider a quiet career in furniture.
             </p>
           </div>
         </article>
@@ -124,6 +176,24 @@
           <span>11 Novemballot</span>
           <span>12 Decorum</span>
           <span>13 Adjustember</span>
+        </div>
+      </section>
+
+      <section class="data-panel about-panel">
+        <div class="panel-title">
+          <span>Official Motto</span>
+          <code>doctrine.motto</code>
+        </div>
+        <div class="prose-grid">
+          <p>
+            American Standard Time: because 24 hours was too European, but
+            decimal time was too French.
+          </p>
+          <p>
+            This motto is binding in spirit, persuasive in meetings, and
+            admissible wherever someone says "roughly" while pointing at a
+            dashboard.
+          </p>
         </div>
       </section>
 

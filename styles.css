@@ -473,6 +473,10 @@ dd {
   font-size: 0.68rem;
 }
 
+.month-cell.empty {
+  visibility: hidden;
+}
+
 .month-cell.today {
   border-color: var(--amber);
   color: var(--amber);
